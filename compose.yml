@@ -1,0 +1,48 @@
+services:
+  template_db:
+    container_name: template_db
+    image: postgres:17-alpine
+    ports:
+      - "127.0.0.1:6543:5432"
+    restart: unless-stopped
+    volumes:
+      - postgres-template:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    healthcheck:
+      test: [ "CMD-SHELL", "sh -c 'pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}'" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 100M
+
+  template_api:
+    depends_on:
+      template_db:
+        condition: service_healthy
+    container_name: template_api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "127.0.0.1:${API_PORT:-8000}:8000"
+    restart: unless-stopped
+    develop:
+      watch:
+        - action: rebuild
+          path: .
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: 1000M
+
+volumes:
+  postgres-template:

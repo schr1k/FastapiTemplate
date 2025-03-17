@@ -1,0 +1,24 @@
+# Python
+.venv
+__pycache__
+
+# IDEs
+.idea
+.vscode
+
+# Git
+.git
+.github
+.gitignore
+README.md
+
+# Docker
+.dockerignore
+Dockerfile
+compose.yml
+
+# Tools
+.editorconfig
+ruff.toml
+.ruff_cache
+.env.example
