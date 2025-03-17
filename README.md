@@ -50,5 +50,5 @@ openssl ecparam -name prime256v1 -genkey -noout -out src/auth/certs/private_key.
 
 Generate ES256 public key
 ```bash
-openssl ec -in private_key.pem -pubout -out src/auth/certs/public_key.pem
+openssl ec -in src/auth/certs/private_key.pem -pubout -out src/auth/certs/public_key.pem
 ```
