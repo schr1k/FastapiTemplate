@@ -1,6 +1,8 @@
 # Python
 .venv
 __pycache__
+ruff.toml
+.ruff_cache
 
 # IDEs
 .idea
@@ -17,8 +19,6 @@ README.md
 Dockerfile
 compose.yml
 
-# Tools
+# Other
 .editorconfig
-ruff.toml
-.ruff_cache
 .env.example

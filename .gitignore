@@ -9,5 +9,5 @@ __pycache__
 
 .env
 
-certs
-!certs/.gitkeep
+src/auth/certs/**
+!src/auth/certs/.gitkeep
