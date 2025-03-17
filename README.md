@@ -12,7 +12,7 @@ python -m venv .venv
 
 * On MacOS/Linux:
 ```bash
-source venv/bin/activate
+source .venv/bin/activate
 ```
 
 3. Install requirements.
@@ -34,21 +34,21 @@ docker compose up --build -d
 ## Default
 #### Development mode (fast-refresh)
 ```bash
-uvicorn main:app --reload
+fastapi dev
 ```
 
 #### Production mode
 ```bash
-uvicorn main:app
+fastapi run
 ```
 
 ## Instructions
 Generate ES256 private key
 ```bash
-openssl ecparam -name prime256v1 -genkey -noout -out certs/private_key.pem
+openssl ecparam -name prime256v1 -genkey -noout -out src/auth/certs/private_key.pem
 ```
 
 Generate ES256 public key
 ```bash
-openssl ec -in private_key.pem -pubout -out certs/public_key.pem
+openssl ec -in private_key.pem -pubout -out src/auth/certs/public_key.pem
 ```
