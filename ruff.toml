@@ -1,6 +1,5 @@
 exclude = [
     ".git",
-    ".mypy_cache",
     ".ruff_cache",
     ".venv",
     ".vscode",
@@ -21,5 +20,4 @@ inline-quotes = "single"
 [format]
 quote-style = "single"
 indent-style = "space"
-skip-magic-trailing-comma = false
 line-ending = "auto"

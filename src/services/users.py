@@ -7,6 +7,7 @@ from src.auth.hash import verify_password
 from src.database.connection import async_session
 from src.database.models import UserModel
 from src.schemas.users import AddUser, Token, UserId, UserInfo
+from src.settings import settings
 
 
 class UsersService:
@@ -18,7 +19,6 @@ class UsersService:
             email_exists = result.scalar()
             if email_exists:
                 raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail='Email is already in use')
-
             query = select(exists().where(UserModel.username == username))
             result = await session.execute(query)
             username_exists = result.scalar()
@@ -44,7 +44,7 @@ class UsersService:
         async with async_session() as session:
             query = select(UserModel).where(UserModel.email == email)
             result = await session.execute(query)
-            user = result.scalars().first()
+            user = await result.scalars().first()
             if not user:
                 raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Invalid username or password')
             if not verify_password(plain_password=password, hashed_password=user.password):
@@ -60,7 +60,7 @@ class UsersService:
             'email': user.email,
         }
         token = encode_jwt(payload=payload)
-        return Token(access_token=token, token_type='Bearer')
+        return Token(access_token=token, token_type=settings.TOKEN_TYPE)
 
     @staticmethod
     async def get_user(user_id: int) -> UserInfo:

@@ -18,10 +18,11 @@ class Settings(BaseSettings):
     # Api
     DEBUG: bool
     API_PORT: int
-    ALGORITHM: str
-    EXPIRE_MINUTES: int
 
     # Jwt
+    TOKEN_TYPE: str
+    ALGORITHM: str
+    EXPIRE_MINUTES: int
     JWT_PRIVATE: str = jwt_private_path.read_text()
     JWT_PUBLIC: str = jwt_public_path.read_text()
 
