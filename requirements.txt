@@ -1,6 +1,7 @@
 asyncpg==0.30.0
 fastapi[standard]==0.115.5
 passlib[bcrypt]==1.7.4
+pre-commit==4.2.0
 pydantic==2.10.1
 pydantic-settings==2.8.1
 PyJWT[crypto]==2.10.1
