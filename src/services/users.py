@@ -44,7 +44,7 @@ class UsersService:
         async with async_session() as session:
             query = select(UserModel).where(UserModel.email == email)
             result = await session.execute(query)
-            user = await result.scalars().first()
+            user = result.scalars().first()
             if not user:
                 raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Invalid username or password')
             if not verify_password(plain_password=password, hashed_password=user.password):

@@ -1,59 +1,43 @@
 # Setup
-1. Create virtual environment.
-```bash
-python -m venv .venv 
-```
+1. Install dependencies.
+    ```bash
+    uv sync
+    ```
 
-2. Activate it.
-* On Windows:
-```bash
-.venv\Scripts\activate
-```
+2. Install pre-commit to automatically lint and format via ruff before commit
+    ```bash
+    uv run pre-commit install
+    ```
 
-* On MacOS/Linux:
-```bash
-source .venv/bin/activate
-```
+3. Generate ES256 private key
+    ```bash
+    openssl ecparam -name prime256v1 -genkey -noout -out src/auth/certs/private_key.pem
+    ```
 
-3. Install requirements.
-```bash
-pip install -r .\requirements.txt
-```
-
-```bash
-pre-commit install
-```
+4. Generate ES256 public key
+    ```bash
+    openssl ec -in src/auth/certs/private_key.pem -pubout -out src/auth/certs/public_key.pem
+    ```
 
 # Launch
-## Docker
-### Development mode (fast-refresh)
-```bash
-docker compose watch
-```
+### Docker
+* Development mode (fast-refresh)
+    ```bash
+    docker compose watch
+    ```
 
-### Production mode
-```bash
-docker compose up --build -d
-```
+* Production mode
+    ```bash
+    docker compose up --build -d
+    ```
 
-## Default
-#### Development mode (fast-refresh)
-```bash
-fastapi dev
-```
+### Pure python
+* Development mode (fast-refresh)
+    ```bash
+    uv run fastapi dev
+    ```
 
-#### Production mode
-```bash
-fastapi run
-```
-
-## Instructions
-Generate ES256 private key
-```bash
-openssl ecparam -name prime256v1 -genkey -noout -out src/auth/certs/private_key.pem
-```
-
-Generate ES256 public key
-```bash
-openssl ec -in src/auth/certs/private_key.pem -pubout -out src/auth/certs/public_key.pem
-```
+* Production mode
+    ```bash
+    uv run fastapi run
+    ```

@@ -1,13 +1,13 @@
-FROM python:3.13-alpine
+FROM ghcr.io/astral-sh/uv:python3.13-alpine
 
 WORKDIR /app
 
-COPY requirements.txt .
+COPY pyproject.toml uv.lock ./
 
-RUN pip install --no-cache-dir -r requirements.txt
+RUN uv sync --frozen --no-install-project --no-dev
 
 COPY . .
 
 EXPOSE 8000
 
-CMD [ "fastapi", "run", "--host", "0.0.0.0", "--port", "8000" ]
+CMD [ "uv", "run", "fastapi", "run", "--host", "0.0.0.0", "--port", "8000" ]

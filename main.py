@@ -19,7 +19,7 @@ swagger_ui_parameters = {
 
 
 @asynccontextmanager
-async def lifespan() -> None:
+async def lifespan(app: FastAPI) -> None:  # noqa: ARG001
     await create_tables()
     yield
     await engine.dispose()
