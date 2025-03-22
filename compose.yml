@@ -20,8 +20,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.1"
-          memory: 100M
+          cpus: "1"
+          memory: 1000M
 
   template_api:
     depends_on:
@@ -38,11 +38,14 @@ services:
       watch:
         - action: rebuild
           path: .
+          target: /app
+          ignore:
+            - .venv/
     deploy:
       resources:
         limits:
-          cpus: "1"
-          memory: 1000M
+          cpus: "2"
+          memory: 2000M
 
 volumes:
   postgres-template:

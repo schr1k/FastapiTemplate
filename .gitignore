@@ -7,7 +7,7 @@ __pycache__
 .idea
 .vscode
 
+# Other
 .env
-
 src/auth/certs/**
 !src/auth/certs/.gitkeep

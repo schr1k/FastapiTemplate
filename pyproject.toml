@@ -1,17 +1,24 @@
 [project]
-name = "fastapitemplate"
-version = "0.1.0"
-description = "Add your description here"
+name = "fastapi_template"
+version = "1.0.0"
+description = "FastAPI template"
 readme = "README.md"
+license = "CC-BY-NC-ND-4.0"
+license-files = ["LICENSE.md"]
 requires-python = ">=3.13"
 dependencies = [
-    "asyncpg==0.30.0",
-    "fastapi[standard]==0.115.5",
-    "passlib[bcrypt]==1.7.4",
-    "pre-commit==4.2.0",
-    "pydantic==2.10.1",
-    "pydantic-settings==2.8.1",
-    "pyjwt[crypto]==2.10.1",
-    "ruff==0.11.0",
-    "sqlalchemy==2.0.39",
+    "asyncpg>=0.30.0",
+    "fastapi[standard]>=0.115.5",
+    "passlib[bcrypt]>=1.7.4",
+    "bcrypt<=4.0.1",
+    "pydantic>=2.10.1",
+    "pydantic-settings>=2.8.1",
+    "pyjwt[crypto]>=2.10.1",
+    "sqlalchemy>=2.0.39",
+]
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.2.0",
+    "ruff>=0.11.0",
 ]

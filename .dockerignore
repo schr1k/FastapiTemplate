@@ -1,8 +1,9 @@
 # Python
 .venv
 __pycache__
-ruff.toml
 .ruff_cache
+ruff.toml
+.python-version
 
 # IDEs
 .idea
@@ -13,6 +14,8 @@ ruff.toml
 .github
 .gitignore
 README.md
+LICENSE.md
+CODE_OF_CONDUCT.md
 
 # Docker
 .dockerignore
@@ -22,3 +25,4 @@ compose.yml
 # Other
 .editorconfig
 .env.example
+.pre-commit-config.yaml
