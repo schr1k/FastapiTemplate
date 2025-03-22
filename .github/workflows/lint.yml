@@ -25,4 +25,4 @@ jobs:
 
       - name: Lint with ruff
         run: |
-          uv run ruff check --output-format=github .
+          uv run --no-project ruff check --output-format=github .
