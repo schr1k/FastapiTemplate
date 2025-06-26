@@ -1,7 +1,7 @@
 from fastapi import APIRouter, status
 
 checks_router = APIRouter(
-    prefix='/checks',
+    prefix='/check',
     tags=['checks'],
 )
 

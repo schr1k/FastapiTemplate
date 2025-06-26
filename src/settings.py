@@ -3,8 +3,8 @@ from pathlib import Path
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 BASE_DIR = Path(__file__).parent.parent
-jwt_private_path: Path = BASE_DIR / 'src' / 'auth' / 'certs' / 'jwt_private.pem'
-jwt_public_path: Path = BASE_DIR / 'src' / 'auth' / 'certs' / 'jwt_public.pem'
+jwt_private_path: Path = BASE_DIR / 'src' / 'auth' / 'certs' / 'private_key.pem'
+jwt_public_path: Path = BASE_DIR / 'src' / 'auth' / 'certs' / 'public_key.pem'
 
 
 class Settings(BaseSettings):
