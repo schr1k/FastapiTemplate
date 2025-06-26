@@ -39,5 +39,5 @@
 
 * Production mode
     ```bash
-    uv run fastapi run
+    uv run --no-dev fastapi run
     ```

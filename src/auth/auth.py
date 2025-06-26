@@ -25,11 +25,11 @@ def encode_jwt(
 def decode_jwt(token: str) -> dict:
     try:
         decoded = decode(token, settings.JWT_PUBLIC, algorithms=[settings.ALGORITHM])
-    except PyJWTError:
+    except PyJWTError as err:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail='Invalid authentication credentials',
-        )
+        ) from err
     else:
         return decoded
 

@@ -1,8 +1,10 @@
+from collections.abc import AsyncGenerator
 from contextlib import asynccontextmanager
+from typing import Any
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import RedirectResponse
+from starlette.responses import RedirectResponse
 
 from src.database.connection import create_tables, engine
 from src.routers.checks import checks_router
@@ -10,6 +12,9 @@ from src.routers.users import users_router
 from src.settings import settings
 
 swagger_ui_parameters = {
+    'filter': True,
+    'defaultModelsExpandDepth': 0,
+    'displayRequestDuration': True,
     'tryItOutEnabled': True,
     'syntaxHighlight': {
         'activate': True,
@@ -19,7 +24,7 @@ swagger_ui_parameters = {
 
 
 @asynccontextmanager
-async def lifespan(app: FastAPI) -> None:  # noqa: ARG001
+async def lifespan(app: FastAPI) -> AsyncGenerator[None, Any]:  # noqa: ARG001
     await create_tables()
     yield
     await engine.dispose()
@@ -53,5 +58,5 @@ app.add_middleware(
 
 
 @app.get('/', include_in_schema=False)
-async def redirect_to_docs() -> None:
+async def redirect_to_docs() -> RedirectResponse:
     return RedirectResponse(url='/docs')
