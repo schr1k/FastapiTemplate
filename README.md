@@ -1,4 +1,5 @@
 # Setup
+
 1. Install dependencies.
     ```bash
     uv sync
@@ -20,7 +21,9 @@
     ```
 
 # Launch
+
 ### Docker
+
 * Development mode (fast-refresh)
     ```bash
     docker compose watch
@@ -32,6 +35,7 @@
     ```
 
 ### Pure python
+
 * Development mode (fast-refresh)
     ```bash
     uv run fastapi dev
