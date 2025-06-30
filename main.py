@@ -24,13 +24,14 @@ swagger_ui_parameters = {
 
 
 @asynccontextmanager
-async def lifespan(app: FastAPI) -> AsyncGenerator[None, Any]:  # noqa: ARG001
+async def lifespan(_: FastAPI) -> AsyncGenerator[None, Any]:
     await create_tables()
     yield
     await engine.dispose()
 
 
 app = FastAPI(
+    title=f'Template {"dev" if settings.DEBUG else "prod"} API',
     swagger_ui_parameters=swagger_ui_parameters,
     debug=settings.DEBUG,
     lifespan=lifespan,
@@ -39,18 +40,9 @@ app = FastAPI(
 app.include_router(checks_router)
 app.include_router(users_router)
 
-origins = [
-    'http://localhost',
-    'https://localhost',
-    'http://127.0.0.1',
-    'https://127.0.0.1',
-    'http://0.0.0.0',
-    'https://0.0.0.0',
-]
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=settings.origins,
     allow_credentials=True,
     allow_methods=['*'],
     allow_headers=['*'],

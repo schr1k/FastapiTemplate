@@ -16,8 +16,9 @@ class Settings(BaseSettings):
     POSTGRES_DB: str
 
     # Api
-    DEBUG: bool
-    API_PORT: int
+    DEBUG: bool = False
+    API_PORT: int = 8000
+    ORIGINS: str = '*'
 
     # Jwt
     TOKEN_TYPE: str
@@ -25,6 +26,10 @@ class Settings(BaseSettings):
     EXPIRE_MINUTES: int
     JWT_PRIVATE: str = jwt_private_path.read_text()
     JWT_PUBLIC: str = jwt_public_path.read_text()
+
+    @property
+    def origins(self) -> list[str]:
+        return self.ORIGINS.split(',')
 
     @property
     def db_url(self) -> str:

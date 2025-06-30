@@ -1,4 +1,5 @@
 from fastapi import HTTPException, status
+from pydantic import EmailStr
 from sqlalchemy.future import select
 from sqlalchemy.sql import exists
 
@@ -40,9 +41,9 @@ class UsersService:
             return response
 
     @staticmethod
-    async def validate_auth_user(email: str, password: str) -> UserInfo | None:
+    async def validate_auth_user(email: EmailStr, password: str) -> UserInfo | None:
         async with async_session() as session:
-            query = select(UserModel).where(UserModel.email == email)
+            query = select(UserModel).where(UserModel.email == str(email))
             result = await session.execute(query)
             user = result.scalars().first()
             if not user:
@@ -52,7 +53,7 @@ class UsersService:
             return user
 
     @staticmethod
-    async def auth_user_with_jwt(email: str, password: str) -> Token:
+    async def auth_user_with_jwt(email: EmailStr, password: str) -> Token:
         user = await UsersService.validate_auth_user(email, password)
         payload = {
             'sub': str(user.id),
